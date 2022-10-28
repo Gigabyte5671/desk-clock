@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Desk Clock</title>
+	<style>
+		* {
+			position: relative;
+			box-sizing: border-box;
+		}
+		html {height: 100%;}
+		body {height: 100%;}
+		main {height: 100%;}
+
+		.clock {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 300px;
+			height: 300px;
+		}
+		.clock .border {
+			position: absolute;
+			z-index: 0;
+			inset: 0px;
+			display: block;
+			border: 5px solid currentColor;
+			border-radius: 50%;
+		}
+		.clock .markings {
+			position: absolute;
+			z-index: 1;
+			inset: 0px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.clock .markings span {
+			position: absolute;
+			display: block;
+			width: 0.2rem;
+			height: 1.5rem;
+			background-color: currentColor;
+			transform-origin: center;
+		}
+		.clock .markings span:nth-child(1) {
+			transform: rotate(0deg) translateY(-120px);
+		}
+		.clock .markings span:nth-child(2) {
+			transform: rotate(90deg) translateY(-120px);
+		}
+		.clock .markings span:nth-child(3) {
+			transform: rotate(180deg) translateY(-120px);
+		}
+		.clock .markings span:nth-child(4) {
+			transform: rotate(270deg) translateY(-120px);
+		}
+		.clock .secondHand {
+			position: absolute;
+			z-index: 5;
+			display: block;
+			width: 0.25rem;
+			height: 45%;
+			background-color: currentColor;
+			clip-path: polygon(
+				50% 0%,
+				100% calc(100% - 0.5rem),
+				50% 100%,
+				0% calc(100% - 0.5rem)
+			);
+			transform-origin: center;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<div class="clock">
+			<span class="border"></span>
+			<div class="markings">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<span class="secondHand"></span>
+		</div>
+	</main>
+</body>
+
+<script>
+	let secondHand = document.querySelector('.secondHand');
+	function updateTime() {
+		const time = new Date();
+		const seconds = time.getSeconds();
+		secondHand.style.transform = `rotate(${seconds * 6}deg) translateY(-40%)`;
+		window.requestAnimationFrame(() => {
+			updateTime();
+		});
+	}
+	updateTime();
+</script>
+</html>
