@@ -40,37 +40,56 @@
 		.clock .markings span {
 			position: absolute;
 			display: block;
-			width: 0.2rem;
-			height: 1.5rem;
+			width: 0.05rem;
+			height: 1rem;
 			background-color: currentColor;
 			transform-origin: center;
 		}
-		.clock .markings span:nth-child(1) {
-			transform: rotate(0deg) translateY(-120px);
+		.clock .markings span:nth-child(5n+1) {
+			width: 0.1rem;
+			height: 1.4rem;
 		}
-		.clock .markings span:nth-child(2) {
-			transform: rotate(90deg) translateY(-120px);
+		.clock .markings span:nth-child(15n+1) {
+			width: 0.1rem;
+			height: 1.7rem;
 		}
-		.clock .markings span:nth-child(3) {
-			transform: rotate(180deg) translateY(-120px);
-		}
-		.clock .markings span:nth-child(4) {
-			transform: rotate(270deg) translateY(-120px);
-		}
-		.clock .secondHand {
+		.clock .secondHand,
+		.clock .minuteHand,
+		.clock .hourHand {
 			position: absolute;
 			z-index: 5;
 			display: block;
 			width: 0.25rem;
-			height: 45%;
 			background-color: currentColor;
+			transform-origin: center;
+		}
+		.clock .secondHand {
+			height: 45%;
 			clip-path: polygon(
 				50% 0%,
 				100% calc(100% - 0.5rem),
 				50% 100%,
 				0% calc(100% - 0.5rem)
 			);
-			transform-origin: center;
+		}
+		.clock .minuteHand {
+			height: 35%;
+			clip-path: polygon(
+				50% 0%,
+				100% calc(100% - 0.5rem),
+				50% 100%,
+				0% calc(100% - 0.5rem)
+			);
+		}
+		.clock .hourHand {
+			width: 0.35rem;
+			height: 25%;
+			clip-path: polygon(
+				50% 0%,
+				100% calc(100% - 0.5rem),
+				50% 100%,
+				0% calc(100% - 0.5rem)
+			);
 		}
 	</style>
 </head>
@@ -78,23 +97,36 @@
 	<main>
 		<div class="clock">
 			<span class="border"></span>
-			<div class="markings">
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
-			</div>
+			<div class="markings"></div>
 			<span class="secondHand"></span>
+			<span class="minuteHand"></span>
+			<span class="hourHand"></span>
 		</div>
 	</main>
 </body>
 
 <script>
+	function generateMarkings() {
+		let markings = '';
+		for (let i = 0;i < 60;i++) {
+			markings += `<span style="transform: rotate(${i * 6}deg) translateY(-120px);"></span>`
+		}
+		document.querySelector('.markings').innerHTML = markings;
+	}
+	generateMarkings();
+</script>
+<script>
 	let secondHand = document.querySelector('.secondHand');
+	let minuteHand = document.querySelector('.minuteHand');
+	let hourHand = document.querySelector('.hourHand');
 	function updateTime() {
 		const time = new Date();
 		const seconds = time.getSeconds();
 		secondHand.style.transform = `rotate(${seconds * 6}deg) translateY(-40%)`;
+		const minutes = time.getMinutes();
+		minuteHand.style.transform = `rotate(${minutes * 6}deg) translateY(-40%)`;
+		const hours = time.getHours();
+		hourHand.style.transform = `rotate(${hours * 30}deg) translateY(-40%)`;
 		window.requestAnimationFrame(() => {
 			updateTime();
 		});
