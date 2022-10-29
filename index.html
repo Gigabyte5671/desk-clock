@@ -209,7 +209,7 @@
 		let events = [];
 		schedule.forEach((event) => {
 			if (
-				parseInt(event.start.split(':')[0]) < time.getHours()
+				parseInt(event.start.split(':')[0]) <= time.getHours()
 				&& parseInt(event.end.split(':')[0]) > time.getHours()
 				&& eventIsToday(event)
 			) {
