@@ -214,14 +214,46 @@
 		return events;
 	}
 
-	function updateEvents() {
-		const currentSchedule = document.querySelector('.schedule.left .events');
-		const events = getActiveEvents();
-		let eventsContent = '<p><i>No events.</i></p>';
-		events.forEach((event) => {
-			eventsContent += `<p style="color: ${event.colour};">${event.title}</p>`;
+	function getUpcomingEvents() {
+		const time = new Date();
+		let events = [];
+		schedule.forEach((event) => {
+			if (
+				parseInt(event.start.split(':')[0]) > time.getHours()
+				&& parseInt(event.start.split(':')[0]) < time.getHours() + 2
+			) {
+				events.push(event);
+			}
 		});
-		currentSchedule.innerHTML = eventsContent;
+		return events;
+	}
+
+	function updateEvents() {
+		// Current:
+		const currentSchedule = document.querySelector('.schedule.left .events');
+		const currentEvents = getActiveEvents();
+		let currentEventsContent = '';
+		if (currentEvents.length > 0) {
+			currentEvents.forEach((event) => {
+				currentEventsContent += `<p style="color: ${event.colour};">${event.title}</p>`;
+			});
+		} else {
+			currentEventsContent = '<p><i>No events.</i></p>';
+		}
+		currentSchedule.innerHTML = currentEventsContent;
+		
+		// Upcoming:
+		const upcomingSchedule = document.querySelector('.schedule.right .events');
+		const upcomingEvents = getUpcomingEvents();
+		let upcomingEventsContent = '';
+		if (upcomingEvents.length > 0) {
+			upcomingEvents.forEach((event) => {
+				upcomingEventsContent += `<p style="color: ${event.colour};">${event.title} - ${event.start}</p>`;
+			});
+		} else {
+			upcomingEventsContent = '<p><i>No events.</i></p>';
+		}
+		upcomingSchedule.innerHTML = upcomingEventsContent;
 
 		window.requestAnimationFrame(() => {
 			updateEvents();
