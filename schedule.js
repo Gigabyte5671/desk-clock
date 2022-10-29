@@ -13,7 +13,7 @@ var schedule = [
 	},
 	{
 		title: 'Lunch',
-		colour: 'green',
+		colour: 'orange',
 		start: '12:00',
 		end: '13:00'
 	},
@@ -25,7 +25,7 @@ var schedule = [
 	},
 	{
 		title: 'Dinner',
-		colour: 'yellow',
+		colour: 'orange',
 		start: '16:00',
 		end: '17:00'
 	},
