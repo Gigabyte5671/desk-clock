@@ -45,6 +45,8 @@
 			width: var(--clock-size);
 			height: var(--clock-size);
 			margin: auto;
+			cursor: pointer;
+			user-select: none;
 		}
 		.clock .border {
 			position: absolute;
@@ -147,7 +149,7 @@
 				<p><i>No events.</i></p>
 			</div>
 		</div>
-		<div class="clock">
+		<div class="clock" onclick="toggleFullscreen()">
 			<span class="border"></span>
 			<div class="markings"></div>
 			<span class="secondHand"></span>
@@ -225,5 +227,16 @@
 		});
 	}
 	updateEvents();
+</script>
+<script>
+	var isFullScreen = false;
+	function toggleFullscreen() {
+		if (isFullScreen) {
+			document.exitFullscreen();
+		} else {
+			document.documentElement.requestFullscreen();
+		}
+		isFullScreen = !isFullScreen;
+	}
 </script>
 </html>
