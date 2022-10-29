@@ -217,10 +217,11 @@
 	function updateEvents() {
 		const currentSchedule = document.querySelector('.schedule.left .events');
 		const events = getActiveEvents();
-		let eventsContent = '';
+		let eventsContent = '<p><i>No events.</i></p>';
 		events.forEach((event) => {
-			eventsContent += `<p>${event.title}</p>`;
+			eventsContent += `<p style="color: ${event.colour};">${event.title}</p>`;
 		});
+		currentSchedule.innerHTML = eventsContent;
 
 		window.requestAnimationFrame(() => {
 			updateEvents();
