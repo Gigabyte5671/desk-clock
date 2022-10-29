@@ -40,5 +40,21 @@ var schedule = [
 		colour: 'red',
 		start: '22:00',
 		end: '24:00'
+	},
+
+	// Unique events:
+	{
+		title: 'Mixers',
+		colour: 'blue',
+		start: '14:00',
+		end: '16:00',
+		day: 'Saturday'
+	},
+	{
+		title: 'Mixers',
+		colour: 'blue',
+		start: '14:00',
+		end: '16:00',
+		day: 'Sunday'
 	}
 ];

@@ -200,6 +200,15 @@
 	updateTime();
 </script>
 <script>
+	function eventIsToday(event) {
+		if (!event.day) {
+			return true;
+		}
+		const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+		const currentDay = new Date().getDay();
+		return days.indexOf(event.day) + 1 === currentDay;
+	}
+
 	function getActiveEvents() {
 		const time = new Date();
 		let events = [];
@@ -207,6 +216,7 @@
 			if (
 				parseInt(event.start.split(':')[0]) < time.getHours()
 				&& parseInt(event.end.split(':')[0]) > time.getHours()
+				&& eventIsToday(event)
 			) {
 				events.push(event);
 			}
@@ -221,6 +231,7 @@
 			if (
 				parseInt(event.start.split(':')[0]) > time.getHours()
 				&& parseInt(event.start.split(':')[0]) < time.getHours() + 2
+				&& eventIsToday(event)
 			) {
 				events.push(event);
 			}
