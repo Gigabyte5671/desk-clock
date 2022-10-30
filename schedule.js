@@ -18,12 +18,6 @@ var schedule = [
 		end: '13:00'
 	},
 	{
-		title: 'Meetings',
-		colour: 'cornflowerblue',
-		start: '14:00',
-		end: '16:00'
-	},
-	{
 		title: 'Dinner',
 		colour: 'orange',
 		start: '16:00',
@@ -44,15 +38,29 @@ var schedule = [
 
 	// Unique events:
 	{
+		title: 'Meetings',
+		colour: 'cornflowerblue',
+		start: '14:00',
+		end: '16:00',
+		day: 'Tuesday'
+	},
+	{
+		title: 'Meetings',
+		colour: 'cornflowerblue',
+		start: '14:00',
+		end: '16:00',
+		day: 'Friday'
+	},
+	{
 		title: 'Mixers',
-		colour: 'blue',
+		colour: 'cornflowerblue',
 		start: '14:00',
 		end: '16:00',
 		day: 'Saturday'
 	},
 	{
 		title: 'Mixers',
-		colour: 'blue',
+		colour: 'cornflowerblue',
 		start: '14:00',
 		end: '16:00',
 		day: 'Sunday'

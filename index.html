@@ -200,9 +200,9 @@
 		if (!event.day) {
 			return true;
 		}
-		const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+		const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 		const currentDay = new Date().getDay();
-		return days.indexOf(event.day) + 1 === currentDay;
+		return days.indexOf(event.day) === currentDay;
 	}
 
 	function getActiveEvents() {
